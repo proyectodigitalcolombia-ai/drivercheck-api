@@ -14,28 +14,15 @@ app.get("/", (req, res) => {
   res.send("DriverCheck API funcionando")
 })
 
-// Health check
+// Ruta health
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
-    service: "drivercheck-api",
-    time: new Date()
+    service: "drivercheck-api"
   })
 })
 
-// Documentación
-app.get("/docs", (req, res) => {
-  res.json({
-    name: "DriverCheck API",
-    endpoints: [
-      {
-        method: "POST",
-        url: "/api/drivers/check"
-      }
-    ]
-  })
-})
-
+// Conectar rutas de drivers
 app.use("/api/drivers", driverRoutes)
 
 const PORT = process.env.PORT || 3000
