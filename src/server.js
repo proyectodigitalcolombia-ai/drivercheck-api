@@ -1,36 +1,28 @@
 const express = require("express")
 const cors = require("cors")
-require("dotenv").config()
-
-const driverRoutes = require("./routes/driverRoutes")
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-// Ruta principal
 app.get("/", (req, res) => {
-  res.send("DriverCheck API funcionando")
+  res.send("API funcionando")
 })
 
-// Health check
 app.get("/health", (req, res) => {
-  res.json({
-    status: "ok",
-    service: "drivercheck-api"
-  })
+  res.json({ status: "ok" })
 })
 
-// Ruta de prueba
 app.get("/test", (req, res) => {
-  res.json({
-    message: "TEST funcionando"
-  })
+  res.json({ message: "TEST OK" })
 })
 
-// Conectar rutas de drivers
-app.use("/api/drivers", driverRoutes)
+app.get("/api/drivers/check", (req, res) => {
+  res.json({
+    message: "Drivers endpoint funcionando"
+  })
+})
 
 const PORT = process.env.PORT || 3000
 
