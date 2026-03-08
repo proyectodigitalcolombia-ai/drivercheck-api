@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-// Ruta GET para probar en el navegador
+// Ruta para probar en el navegador
 router.get("/check", (req, res) => {
   res.json({
     message: "Endpoint funcionando",
@@ -9,7 +9,7 @@ router.get("/check", (req, res) => {
   })
 })
 
-// Ruta POST para verificar conductor
+// Ruta real de verificación
 router.post("/check", (req, res) => {
 
   const { license } = req.body
@@ -20,7 +20,6 @@ router.post("/check", (req, res) => {
     })
   }
 
-  // Respuesta simulada
   res.json({
     license: license,
     status: "valid",
