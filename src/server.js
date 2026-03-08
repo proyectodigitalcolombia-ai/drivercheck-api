@@ -6,22 +6,28 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// home
 app.get("/", (req, res) => {
-  res.send("API funcionando")
+  res.send("DriverCheck API funcionando")
 })
 
+// health check
 app.get("/health", (req, res) => {
   res.json({ status: "ok" })
 })
 
-app.get("/test", (req, res) => {
-  res.json({ message: "TEST OK" })
-})
+// endpoint para verificar conductor
+app.get("/api/drivers/check/:doc", (req, res) => {
 
-app.get("/api/drivers/check", (req, res) => {
+  const doc = req.params.doc
+
   res.json({
-    message: "Drivers endpoint funcionando"
+    document: doc,
+    police: "sin antecedentes",
+    procuraduria: "sin sanciones",
+    score: 92
   })
+
 })
 
 const PORT = process.env.PORT || 3000
