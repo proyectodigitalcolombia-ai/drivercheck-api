@@ -9,29 +9,31 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Ruta principal
 app.get("/", (req, res) => {
- res.send("DriverCheck API funcionando")
+  res.send("DriverCheck API funcionando")
 })
 
+// Health check
 app.get("/health", (req, res) => {
- res.json({
-  status: "ok",
-  service: "drivercheck-api",
-  time: new Date()
- })
+  res.json({
+    status: "ok",
+    service: "drivercheck-api",
+    time: new Date()
+  })
 })
 
+// Documentación
 app.get("/docs", (req, res) => {
- res.json({
-  name: "DriverCheck API",
-  version: "1.0",
-  endpoints: [
-   {
-    method: "POST",
-    url: "/api/drivers/check"
-   }
-  ]
- })
+  res.json({
+    name: "DriverCheck API",
+    endpoints: [
+      {
+        method: "POST",
+        url: "/api/drivers/check"
+      }
+    ]
+  })
 })
 
 app.use("/api/drivers", driverRoutes)
@@ -39,5 +41,5 @@ app.use("/api/drivers", driverRoutes)
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
- console.log("Servidor corriendo en puerto " + PORT)
+  console.log("Servidor corriendo en puerto " + PORT)
 })
