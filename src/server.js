@@ -14,11 +14,18 @@ app.get("/", (req, res) => {
   res.send("DriverCheck API funcionando")
 })
 
-// Ruta health
+// Health check
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     service: "drivercheck-api"
+  })
+})
+
+// Ruta de prueba
+app.get("/test", (req, res) => {
+  res.json({
+    message: "TEST funcionando"
   })
 })
 
