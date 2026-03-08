@@ -1,12 +1,41 @@
-const { Pool } = require("pg")
-require("dotenv").config()
+const policiaService = require("../services/policiaService")
+const simitService = require("../services/simitService")
+const runtService = require("../services/runtService")
+const procuraduriaService = require("../services/procuraduriaService")
+const score = require("../utils/score")
 
-const pool = new Pool({
- host: process.env.DB_HOST,
- user: process.env.DB_USER,
- password: process.env.DB_PASSWORD,
- database: process.env.DB_NAME,
- port: process.env.DB_PORT
-})
+exports.checkDriver = async (req, res) => {
 
-module.exports = pool
+ const { documento } = req.body
+
+ try {
+
+  const policia = await policiaService.consultar(documento)
+  const simit = await simitService.consultar(documento)
+  const runt = await runtService.consultar(documento)
+  const procuraduria = await procuraduriaService.consultar(documento)
+
+  const riskScore = score.calcular({
+   policia,
+   simit
+  })
+
+  res.json({
+   policia,
+   simit,
+   runt,
+   procuraduria,
+   score: riskScore
+  })
+
+ } catch (error) {
+
+  console.error(error)
+
+  res.status(500).json({
+   error: "Error consultando conductor"
+  })
+
+ }
+
+}
