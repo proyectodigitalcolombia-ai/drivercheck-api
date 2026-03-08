@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>DriverCheck</title>
@@ -55,15 +56,15 @@ font-weight:bold;
 
 <h2>DriverCheck</h2>
 
-<p>Verificar conductor</p>
+<p>Verificación de conductores</p>
 
 <input id="doc" placeholder="Número de documento">
 
 <button onclick="checkDriver()">
-Consultar
+Consultar conductor
 </button>
 
-<div id="result"></div>
+<pre id="result"></pre>
 
 </div>
 
@@ -73,9 +74,15 @@ async function checkDriver(){
 
 const doc = document.getElementById("doc").value
 
-const res = await fetch(
-"https://drivercheck-api-muit.onrender.com/api/drivers/check"
-)
+if(!doc){
+alert("Ingrese documento")
+return
+}
+
+const url =
+"https://drivercheck-api-muit.onrender.com/api/drivers/check/" + doc
+
+const res = await fetch(url)
 
 const data = await res.json()
 
@@ -87,4 +94,5 @@ JSON.stringify(data,null,2)
 </script>
 
 </body>
+
 </html>
