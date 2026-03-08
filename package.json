@@ -1,7 +1,6 @@
 {
   "name": "drivercheck-api",
   "version": "1.0.0",
-  "description": "API para verificar conductores",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js"
